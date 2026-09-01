@@ -10,9 +10,9 @@
 
 **8 plugins for [bb](https://getbb.app), the agent IDE.**
 
-<img src="https://img.shields.io/badge/plugins-8-1f2430?style=flat-square" alt="">
-<a href="https://github.com/get-bb/marketplace"><img src="https://img.shields.io/badge/BB%20Community-marketplace-1f2430?style=flat-square" alt=""></a>
-<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f2430?style=flat-square" alt=""></a>
+<img src="https://img.shields.io/badge/plugins-8-1f2430?style=flat-square" alt="8 plugins">
+<a href="https://github.com/get-bb/marketplace"><img src="https://img.shields.io/badge/BB%20Community-marketplace-1f2430?style=flat-square" alt="Listed in the BB Community marketplace"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f2430?style=flat-square" alt="MIT license"></a>
 
 </div>
 

@@ -147,13 +147,21 @@ async function main () {
 function render (plugins) {
   const rows = plugins.map((p) => {
     const slug = repoSlug(p)
+    // npm-sourced or malformed entries have no GitHub slug; render them unlinked
+    // rather than emitting href="https://github.com/null".
+    const href = slug ? `https://github.com/${slug}` : null
+    const link = (inner) => (href ? `<a href="${href}">${inner}</a>` : inner)
+    // Only reference an icon the vendor step actually wrote.
+    const icon = p.icon?.url
+      ? link(`<img src="icons/${p.id}.svg" width="44" height="44" alt="">`)
+      : '&nbsp;'
     const tags = (p.tags ?? []).slice(0, 6).map((t) => `<code>${esc(t)}</code>`).join(' ')
     return `  <tr>
     <td width="76" align="center" valign="top">
-      <a href="https://github.com/${slug}"><img src="icons/${p.id}.svg" width="44" height="44" alt=""></a>
+      ${icon}
     </td>
     <td valign="top">
-      <a href="https://github.com/${slug}"><b>${esc(p.displayName)}</b></a>
+      ${link(`<b>${esc(p.displayName)}</b>`)}
       &nbsp;<code>bb plugin install ${p.id}</code>
       <br>
       ${esc(p.description)}
@@ -175,9 +183,9 @@ function render (plugins) {
 
 **${plugins.length} plugins for [bb](https://getbb.app), the agent IDE.**
 
-<img src="https://img.shields.io/badge/plugins-${plugins.length}-1f2430?style=flat-square" alt="">
-<a href="https://github.com/get-bb/marketplace"><img src="https://img.shields.io/badge/BB%20Community-marketplace-1f2430?style=flat-square" alt=""></a>
-<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f2430?style=flat-square" alt=""></a>
+<img src="https://img.shields.io/badge/plugins-${plugins.length}-1f2430?style=flat-square" alt="${plugins.length} plugins">
+<a href="https://github.com/get-bb/marketplace"><img src="https://img.shields.io/badge/BB%20Community-marketplace-1f2430?style=flat-square" alt="Listed in the BB Community marketplace"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f2430?style=flat-square" alt="MIT license"></a>
 
 </div>
 
