@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1f2430" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <!-- The plugin's own two-way arrow mark. BB renders plugin icons as CSS
        masks keyed off alpha coverage, so the stroke is an opaque literal
        rather than currentColor, which has no inherited context inside a

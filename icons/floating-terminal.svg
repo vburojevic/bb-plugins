@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-     stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+     stroke="#1f2430" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
   <!-- A window with a tab strip and a shell prompt inside it: the plugin is a
        floating window of tabbed PTYs, not a terminal pane. Outline style to
        match BB's stroked icon set (1.5 at a 24 viewBox). BB renders plugin

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1f2430">
   <!-- Paw print: one pad and four toes, matching the plugin's own brand icon.
        BB renders plugin icons as CSS masks, which key off alpha coverage, so
        the fill is an opaque literal rather than currentColor — currentColor

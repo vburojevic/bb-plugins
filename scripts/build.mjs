@@ -66,6 +66,22 @@ function repoSlug (entry) {
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
+// These icons are authored as CSS *mask sources* for BB, which keys off alpha
+// coverage and paints the result itself — so they hardcode #000 (or
+// currentColor, which has no inherited context inside an <img>). Dropped
+// straight into a README that is black-on-black in dark mode. Recolour them
+// into an explicit pair instead, and let <picture> choose.
+//
+// Only near-black and currentColor are rewritten; an icon carrying a real
+// brand colour (linear's #5E6AD2) is already legible on both canvases and is
+// left exactly as its author drew it.
+const INK = { light: '#1f2430', dark: '#c9d1d9' }
+
+function theme (svg, colour) {
+  return svg.replace(/(stroke|fill)="(#000|#000000|black|currentColor)"/gi,
+                     (_, attr) => `${attr}="${colour}"`)
+}
+
 // -------------------------------------------------------------------- main
 
 async function main () {
@@ -105,7 +121,9 @@ async function main () {
     if (!src) { console.warn(`!  ${p.id} has no icon`); continue }
     const res = await fetch(new URL(src, MARKETPLACE))
     if (!res.ok) throw new Error(`icon for ${p.id} -> HTTP ${res.status}`)
-    await writeFile(join(ROOT, 'icons', `${p.id}.svg`), Buffer.from(await res.arrayBuffer()))
+    const svg = await res.text()
+    await writeFile(join(ROOT, 'icons', `${p.id}.svg`), theme(svg, INK.light))
+    await writeFile(join(ROOT, 'icons', `${p.id}-dark.svg`), theme(svg, INK.dark))
   }
 
   // ---- stranded-version check
@@ -145,30 +163,24 @@ async function main () {
 // ------------------------------------------------------------------ render
 
 function render (plugins) {
-  const rows = plugins.map((p) => {
+  // Not a <table>. GitHub styles .markdown-body table as
+  //   display:block; width:max-content; max-width:100%; overflow:auto
+  // so a cell holding a full marketplace description blows the intrinsic width
+  // out, gets clamped to 100%, and the row clips its own text. Plain sections
+  // wrap the way prose is supposed to.
+  const cards = plugins.map((p) => {
     const slug = repoSlug(p)
-    // npm-sourced or malformed entries have no GitHub slug; render them unlinked
-    // rather than emitting href="https://github.com/null".
-    const href = slug ? `https://github.com/${slug}` : null
-    const link = (inner) => (href ? `<a href="${href}">${inner}</a>` : inner)
-    // Only reference an icon the vendor step actually wrote.
+    const title = slug ? `[${esc(p.displayName)}](https://github.com/${slug})` : esc(p.displayName)
     const icon = p.icon?.url
-      ? link(`<img src="icons/${p.id}.svg" width="44" height="44" alt="">`)
-      : '&nbsp;'
-    const tags = (p.tags ?? []).slice(0, 6).map((t) => `<code>${esc(t)}</code>`).join(' ')
-    return `  <tr>
-    <td width="76" align="center" valign="top">
-      ${icon}
-    </td>
-    <td valign="top">
-      ${link(`<b>${esc(p.displayName)}</b>`)}
-      &nbsp;<code>bb plugin install ${p.id}</code>
-      <br>
-      ${esc(p.description)}
-      <br>
-      <sub>${tags}</sub>
-    </td>
-  </tr>`
+      ? `<picture>` +
+        `<source media="(prefers-color-scheme: dark)" srcset="icons/${p.id}-dark.svg">` +
+        `<img src="icons/${p.id}.svg" width="20" height="20" align="top" alt="">` +
+        `</picture> `
+      : ''
+    const tags = (p.tags ?? []).slice(0, 6).map(esc).join(' · ')
+    return `### ${icon}${title}\n\n${esc(p.description)}\n\n` +
+           '```sh\n' + `bb plugin install ${p.id}\n` + '```\n' +
+           (tags ? `\n<sub>${tags}</sub>\n` : '')
   }).join('\n')
 
   return `<!--
@@ -183,20 +195,13 @@ function render (plugins) {
 
 **${plugins.length} plugins for [bb](https://getbb.app), the agent IDE.**
 
-<img src="https://img.shields.io/badge/plugins-${plugins.length}-1f2430?style=flat-square" alt="${plugins.length} plugins">
-<a href="https://github.com/get-bb/marketplace"><img src="https://img.shields.io/badge/BB%20Community-marketplace-1f2430?style=flat-square" alt="Listed in the BB Community marketplace"></a>
-<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f2430?style=flat-square" alt="MIT license"></a>
+<img src="https://img.shields.io/badge/plugins-${plugins.length}-57606a?style=flat-square" alt="${plugins.length} plugins">
+<a href="https://github.com/get-bb/marketplace"><img src="https://img.shields.io/badge/BB%20Community-marketplace-57606a?style=flat-square" alt="Listed in the BB Community marketplace"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-57606a?style=flat-square" alt="MIT license"></a>
 
 </div>
 
-<br>
-
-<table>
-${rows}
-</table>
-
-<br>
-
+${cards}
 ## Install
 
 All of these are listed in the [BB Community marketplace](https://github.com/get-bb/marketplace), so BB installs them by name:

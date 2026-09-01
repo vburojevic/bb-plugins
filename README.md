@@ -10,122 +10,91 @@
 
 **8 plugins for [bb](https://getbb.app), the agent IDE.**
 
-<img src="https://img.shields.io/badge/plugins-8-1f2430?style=flat-square" alt="8 plugins">
-<a href="https://github.com/get-bb/marketplace"><img src="https://img.shields.io/badge/BB%20Community-marketplace-1f2430?style=flat-square" alt="Listed in the BB Community marketplace"></a>
-<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f2430?style=flat-square" alt="MIT license"></a>
+<img src="https://img.shields.io/badge/plugins-8-57606a?style=flat-square" alt="8 plugins">
+<a href="https://github.com/get-bb/marketplace"><img src="https://img.shields.io/badge/BB%20Community-marketplace-57606a?style=flat-square" alt="Listed in the BB Community marketplace"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-57606a?style=flat-square" alt="MIT license"></a>
 
 </div>
 
-<br>
+### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/xcode-dark.svg"><img src="icons/xcode.svg" width="20" height="20" align="top" alt=""></picture> [Xcode](https://github.com/vburojevic/bb-plugin-xcode)
 
-<table>
-  <tr>
-    <td width="76" align="center" valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-xcode"><img src="icons/xcode.svg" width="44" height="44" alt=""></a>
-    </td>
-    <td valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-xcode"><b>Xcode</b></a>
-      &nbsp;<code>bb plugin install xcode</code>
-      <br>
-      Tracks every Xcode build and test on the machine with no per-project configuration — live progress, verdicts, errors with file:line, history and trends — and streams the simulators they run on into the panel with full touch input, a build-aware device picker, SwiftUI preview diffs, and gated agent tools.
-      <br>
-      <sub><code>xcode</code> <code>ios</code> <code>simulator</code> <code>builds</code> <code>tests</code> <code>swiftui</code></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="76" align="center" valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-handoff"><img src="icons/handoff.svg" width="44" height="44" alt=""></a>
-    </td>
-    <td valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-handoff"><b>Handoff</b></a>
-      &nbsp;<code>bb plugin install handoff</code>
-      <br>
-      Moves a whole session between agents and machines in both directions: hands a bb thread's rendered transcript to another provider (optionally on another enrolled machine, carrying uncommitted work as a patch), or adopts a Claude Code, Codex, Gemini CLI or OpenCode session from your terminal as a bb thread in the same directory.
-      <br>
-      <sub><code>handoff</code> <code>session</code> <code>transcript</code> <code>providers</code> <code>machines</code> <code>claude-code</code></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="76" align="center" valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-floating-terminal"><img src="icons/floating-terminal.svg" width="44" height="44" alt=""></a>
-    </td>
-    <td valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-floating-terminal"><b>Floating Terminal</b></a>
-      &nbsp;<code>bb plugin install floating-terminal</code>
-      <br>
-      Adds a draggable terminal window over bb, opened from the sidebar footer or Ctrl+`, with a tab per shell in any project checkout or machine home directory; tabs are persisted, so a reload or a bb restart reattaches to the same shells with their scrollback.
-      <br>
-      <sub><code>terminal</code> <code>shell</code> <code>developer-tools</code> <code>xterm</code> <code>pty</code> <code>tabs</code></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="76" align="center" valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-prompts"><img src="icons/prompts.svg" width="44" height="44" alt=""></a>
-    </td>
-    <td valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-prompts"><b>Prompts</b></a>
-      &nbsp;<code>bb plugin install prompts</code>
-      <br>
-      Stashes prompts you write while an agent is busy and injects, schedules, or auto-sends them when it next goes idle, alongside a searchable snippet library with {{fill-in}} templates.
-      <br>
-      <sub><code>prompts</code> <code>queue</code> <code>snippets</code> <code>templates</code> <code>composer</code> <code>scheduling</code></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="76" align="center" valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-prompt-enhancer"><img src="icons/prompt-enhancer.svg" width="44" height="44" alt=""></a>
-    </td>
-    <td valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-prompt-enhancer"><b>Prompt Enhancer</b></a>
-      &nbsp;<code>bb plugin install prompt-enhancer</code>
-      <br>
-      Rewrites the composer draft into a clearer prompt through a hidden bb thread, keeping follow-ups short, preserving @mentions and file paths, and offering Undo.
-      <br>
-      <sub><code>composer</code> <code>prompt</code> <code>writing</code> <code>interface</code> <code>keyboard-shortcuts</code></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="76" align="center" valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-linear"><img src="icons/linear.svg" width="44" height="44" alt=""></a>
-    </td>
-    <td valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-linear"><b>Linear</b></a>
-      &nbsp;<code>bb plugin install linear</code>
-      <br>
-      Linear inside bb — a list-first issue browser, inbox, and create dialog served from a local mirror, thirteen linear_* agent tools, a bb linear CLI, and every thread resolving which issue it works on, shown live in the header and side panel and injected into agent context.
-      <br>
-      <sub><code>linear</code> <code>issues</code> <code>issue-tracking</code> <code>inbox</code> <code>agent-tools</code> <code>threads</code></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="76" align="center" valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-pets"><img src="icons/pets.svg" width="44" height="44" alt=""></a>
-    </td>
-    <td valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-pets"><b>Pets</b></a>
-      &nbsp;<code>bb plugin install pets</code>
-      <br>
-      Adds a pixel companion to the BB window that mirrors your fleet, walks to threads waiting on you, and earns XP from finished turns.
-      <br>
-      <sub><code>companion</code> <code>interface</code> <code>pixel-art</code> <code>threads</code> <code>ai-art</code></sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="76" align="center" valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-ayu"><img src="icons/ayu.svg" width="44" height="44" alt=""></a>
-    </td>
-    <td valign="top">
-      <a href="https://github.com/vburojevic/bb-plugin-ayu"><b>Ayu</b></a>
-      &nbsp;<code>bb plugin install ayu</code>
-      <br>
-      Adds the three ayu themes (Light, Dark and Mirage) and a settings panel that switches between them and copies any colour from the palette.
-      <br>
-      <sub><code>themes</code> <code>appearance</code> <code>colors</code> <code>syntax-highlighting</code> <code>interface</code> <code>ayu</code></sub>
-    </td>
-  </tr>
-</table>
+Tracks every Xcode build and test on the machine with no per-project configuration — live progress, verdicts, errors with file:line, history and trends — and streams the simulators they run on into the panel with full touch input, a build-aware device picker, SwiftUI preview diffs, and gated agent tools.
 
-<br>
+```sh
+bb plugin install xcode
+```
+
+<sub>xcode · ios · simulator · builds · tests · swiftui</sub>
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/handoff-dark.svg"><img src="icons/handoff.svg" width="20" height="20" align="top" alt=""></picture> [Handoff](https://github.com/vburojevic/bb-plugin-handoff)
+
+Moves a whole session between agents and machines in both directions: hands a bb thread's rendered transcript to another provider (optionally on another enrolled machine, carrying uncommitted work as a patch), or adopts a Claude Code, Codex, Gemini CLI or OpenCode session from your terminal as a bb thread in the same directory.
+
+```sh
+bb plugin install handoff
+```
+
+<sub>handoff · session · transcript · providers · machines · claude-code</sub>
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/floating-terminal-dark.svg"><img src="icons/floating-terminal.svg" width="20" height="20" align="top" alt=""></picture> [Floating Terminal](https://github.com/vburojevic/bb-plugin-floating-terminal)
+
+Adds a draggable terminal window over bb, opened from the sidebar footer or Ctrl+`, with a tab per shell in any project checkout or machine home directory; tabs are persisted, so a reload or a bb restart reattaches to the same shells with their scrollback.
+
+```sh
+bb plugin install floating-terminal
+```
+
+<sub>terminal · shell · developer-tools · xterm · pty · tabs</sub>
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/prompts-dark.svg"><img src="icons/prompts.svg" width="20" height="20" align="top" alt=""></picture> [Prompts](https://github.com/vburojevic/bb-plugin-prompts)
+
+Stashes prompts you write while an agent is busy and injects, schedules, or auto-sends them when it next goes idle, alongside a searchable snippet library with {{fill-in}} templates.
+
+```sh
+bb plugin install prompts
+```
+
+<sub>prompts · queue · snippets · templates · composer · scheduling</sub>
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/prompt-enhancer-dark.svg"><img src="icons/prompt-enhancer.svg" width="20" height="20" align="top" alt=""></picture> [Prompt Enhancer](https://github.com/vburojevic/bb-plugin-prompt-enhancer)
+
+Rewrites the composer draft into a clearer prompt through a hidden bb thread, keeping follow-ups short, preserving @mentions and file paths, and offering Undo.
+
+```sh
+bb plugin install prompt-enhancer
+```
+
+<sub>composer · prompt · writing · interface · keyboard-shortcuts</sub>
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/linear-dark.svg"><img src="icons/linear.svg" width="20" height="20" align="top" alt=""></picture> [Linear](https://github.com/vburojevic/bb-plugin-linear)
+
+Linear inside bb — a list-first issue browser, inbox, and create dialog served from a local mirror, thirteen linear_* agent tools, a bb linear CLI, and every thread resolving which issue it works on, shown live in the header and side panel and injected into agent context.
+
+```sh
+bb plugin install linear
+```
+
+<sub>linear · issues · issue-tracking · inbox · agent-tools · threads</sub>
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/pets-dark.svg"><img src="icons/pets.svg" width="20" height="20" align="top" alt=""></picture> [Pets](https://github.com/vburojevic/bb-plugin-pets)
+
+Adds a pixel companion to the BB window that mirrors your fleet, walks to threads waiting on you, and earns XP from finished turns.
+
+```sh
+bb plugin install pets
+```
+
+<sub>companion · interface · pixel-art · threads · ai-art</sub>
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/ayu-dark.svg"><img src="icons/ayu.svg" width="20" height="20" align="top" alt=""></picture> [Ayu](https://github.com/vburojevic/bb-plugin-ayu)
+
+Adds the three ayu themes (Light, Dark and Mirage) and a settings panel that switches between them and copies any colour from the palette.
+
+```sh
+bb plugin install ayu
+```
+
+<sub>themes · appearance · colors · syntax-highlighting · interface · ayu</sub>
 
 ## Install
 
