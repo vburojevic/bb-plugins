@@ -1,0 +1,13 @@
+{
+  "name": "bb-plugins",
+  "private": true,
+  "type": "module",
+  "description": "Index of the bb plugins published by vburojevic",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
