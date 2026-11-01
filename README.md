@@ -8,9 +8,9 @@
 
 # bb plugins
 
-**8 plugins for [bb](https://getbb.app), the agent IDE.**
+**9 plugins for [bb](https://getbb.app), the agent IDE.**
 
-<img src="https://img.shields.io/badge/plugins-8-57606a?style=flat-square" alt="8 plugins">
+<img src="https://img.shields.io/badge/plugins-9-57606a?style=flat-square" alt="9 plugins">
 <a href="https://github.com/get-bb/marketplace"><img src="https://img.shields.io/badge/BB%20Community-marketplace-57606a?style=flat-square" alt="Listed in the BB Community marketplace"></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-57606a?style=flat-square" alt="MIT license"></a>
 
@@ -45,6 +45,16 @@ bb plugin install floating-terminal
 ```
 
 <sub>terminal · shell · developer-tools · xterm · pty · tabs</sub>
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/floating-notes-dark.svg"><img src="icons/floating-notes.svg" width="20" height="20" align="top" alt=""></picture> [Floating Notes](https://github.com/vburojevic/bb-plugin-floating-notes)
+
+Keep a note beside the work it belongs to, one keystroke from any thread. Notes group themselves by project, thread and day, so nothing lands in a flat pile. Stickies pin to a thread or a project and appear only while you are looking at it, and every thread gets a scratchpad your agents can append findings to. Writes real markdown — clickable checklists, highlighted code fences, wiki links — and stores everything in a local SQLite file with no account and no network.
+
+```sh
+bb plugin install floating-notes
+```
+
+<sub>notes · sticky-notes · markdown · scratchpad · checklists · capture</sub>
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/prompts-dark.svg"><img src="icons/prompts.svg" width="20" height="20" align="top" alt=""></picture> [Prompts](https://github.com/vburojevic/bb-plugin-prompts)
 
