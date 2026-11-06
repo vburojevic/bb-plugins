@@ -1,0 +1,45 @@
+{
+  "xcode": {
+    "shot": "docs/screenshots/live-picker.png",
+    "alt": "The live simulator with the device picker open"
+  },
+  "handoff": {
+    "shot": "assets/screenshots/handoff-panel.png",
+    "alt": "The Hand off panel: pick a target agent, a machine, a model and a workspace mode"
+  },
+  "floating-terminal": {
+    "shot": "docs/media/hero.png",
+    "alt": "Three shells floating over a bb thread"
+  },
+  "floating-notes": {
+    "shot": "docs/media/light/hero.png",
+    "dark": "docs/media/dark/hero.png",
+    "alt": "The Floating Notes window and three stickies over a bb thread"
+  },
+  "prompts": {
+    "shot": "assets/screenshots/queue.png",
+    "dark": "assets/screenshots/queue-dark.png",
+    "alt": "The prompt queue open in a bb thread, with prompts waiting, one set to auto-send and one booked for a time"
+  },
+  "prompt-enhancer": {
+    "shot": "assets/screenshots/hero.png",
+    "alt": "A rough one-line draft rewritten into a brief with a Done when list"
+  },
+  "iris": {
+    "shot": "docs/hero-light.png",
+    "dark": "docs/hero-dark.png",
+    "alt": "Iris cards in a bb chat"
+  },
+  "linear": {
+    "shot": "assets/readme/panel.png",
+    "alt": "The Linear panel in bb, listing issues"
+  },
+  "pets": {
+    "shot": "docs/media/tour.png",
+    "alt": "The pet introducing itself above the composer"
+  },
+  "ayu": {
+    "shot": "assets/screenshots/hero.png",
+    "alt": "Ayu Light, Ayu Dark and Ayu Mirage side by side"
+  }
+}

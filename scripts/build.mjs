@@ -4,15 +4,19 @@
  *
  * Source of truth is https://getbb.app/marketplace/v1/marketplace.json — the same
  * catalog BB itself reads. This script filters it down to entries authored by
- * OWNER, vendors their icons into ./icons, and rewrites README.md.
+ * OWNER, vendors their icons into ./icons, draws the hero into ./assets, and
+ * rewrites README.md. Each card's one-liner is the plugin repo's GitHub
+ * description; its screenshot comes from showcase.json.
  *
  * Run it by hand:  npm run build
- * There is no CI, no cron and no token. Nothing here runs on its own.
+ * There is no CI and no cron. GITHUB_TOKEN is optional; it only lifts
+ * GitHub's anonymous rate limit. Nothing here runs on its own.
  */
 
 import { writeFile, mkdir, readFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { hero, SPOTS } from './hero.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -24,7 +28,16 @@ const HUB = `https://github.com/${OWNER}/bb-plugins`
 // ---------------------------------------------------------------- fetching
 
 async function fetchJson (url) {
-  const res = await fetch(url, { headers: { accept: 'application/json' } })
+  const headers = { accept: 'application/json' }
+  if (process.env.GITHUB_TOKEN && url.startsWith('https://api.github.com/')) {
+    headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`
+  }
+  let res = await fetch(url, { headers })
+  if (res.status === 401 && headers.authorization) {
+    console.warn('!  GITHUB_TOKEN was rejected; retrying without it')
+    delete headers.authorization
+    res = await fetch(url, { headers })
+  }
   if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`)
   return res.json()
 }
@@ -64,7 +77,9 @@ function repoSlug (entry) {
   return m ? `${m[1]}/${m[2]}` : null
 }
 
-const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+/** Text safe inside a markdown link's [label]. */
+const escLink = (s) => esc(s).replace(/([[\]*_`\\])/g, '\\$1')
 
 // These icons are authored as CSS *mask sources* for BB, which keys off alpha
 // coverage and paints the result itself — so they hardcode #000 (or
@@ -117,16 +132,51 @@ async function main () {
 
   const plugins = [...order.filter((id) => byId.has(id)), ...extra].map((id) => byId.get(id))
 
+  // ---- read everything remote first, so a failed fetch writes nothing
+  const showcase = JSON.parse(await readFile(join(ROOT, 'showcase.json'), 'utf8'))
+  const icons = new Map()
+  try {
+    for (const p of plugins) {
+      if (!showcase[p.id]) console.warn(`!  ${p.id} has no screenshot in showcase.json`)
+
+      // One-liner: the plugin repo's own GitHub description. Only a repo that
+      // really has none falls back to the marketplace's first sentence; an
+      // API error (rate limit, bad token, outage) stops the build instead.
+      const slug = repoSlug(p)
+      p.tagline = slug ? (await fetchJson(`https://api.github.com/repos/${slug}`)).description : null
+      if (!p.tagline) {
+        console.warn(`!  ${p.id}: no GitHub description, using the marketplace's first sentence`)
+        p.tagline = /^[^.]*\./.exec(p.description)?.[0] ?? p.description
+      }
+
+      const src = p.icon?.url
+      if (!src) { console.warn(`!  ${p.id} has no icon`); continue }
+      const res = await fetch(new URL(src, MARKETPLACE))
+      if (!res.ok) throw new Error(`icon for ${p.id} -> HTTP ${res.status}`)
+      const svg = await res.text()
+      // The hero inlines every icon into one SVG, where ids would collide.
+      if (/\sid="/.test(svg)) throw new Error(`icon for ${p.id} uses id="…"; the hero can't inline it safely`)
+      icons.set(p.id, svg)
+    }
+  } catch (err) {
+    console.error(`\n✗ ${err.message}`)
+    console.error('  Nothing was written. Check GITHUB_TOKEN or wait out the rate limit, then re-run.\n')
+    process.exit(1)
+  }
+
   // ---- vendor the icons (GitHub's camo proxy will not render remote SVGs)
   await mkdir(join(ROOT, 'icons'), { recursive: true })
-  for (const p of plugins) {
-    const src = p.icon?.url
-    if (!src) { console.warn(`!  ${p.id} has no icon`); continue }
-    const res = await fetch(new URL(src, MARKETPLACE))
-    if (!res.ok) throw new Error(`icon for ${p.id} -> HTTP ${res.status}`)
-    const svg = await res.text()
-    await writeFile(join(ROOT, 'icons', `${p.id}.svg`), theme(svg, INK.light))
-    await writeFile(join(ROOT, 'icons', `${p.id}-dark.svg`), theme(svg, INK.dark))
+  for (const [id, svg] of icons) {
+    await writeFile(join(ROOT, 'icons', `${id}.svg`), theme(svg, INK.light))
+    await writeFile(join(ROOT, 'icons', `${id}-dark.svg`), theme(svg, INK.dark))
+  }
+
+  // ---- the hero: every plugin's mark where it lives in bb
+  const unplaced = plugins.map((p) => p.id).filter((id) => !SPOTS[id])
+  if (unplaced.length) console.warn(`!  not placed in the hero yet (add a spot in scripts/hero.mjs): ${unplaced.join(', ')}`)
+  await mkdir(join(ROOT, 'assets'), { recursive: true })
+  for (const t of ['light', 'dark']) {
+    await writeFile(join(ROOT, 'assets', `hero-${t}.svg`), await hero(join(ROOT, 'icons'), [...icons.keys()], t))
   }
 
   // ---- stranded-version check
@@ -159,32 +209,73 @@ async function main () {
     }
   }
 
-  await writeFile(join(ROOT, 'README.md'), render(plugins))
+  await writeFile(join(ROOT, 'README.md'), render(plugins, showcase))
   console.log(`\n✓ README.md — ${plugins.length} plugins, ${plugins.length} icons vendored\n`)
 }
 
 // ------------------------------------------------------------------ render
 
-function render (plugins) {
-  // Not a <table>. GitHub styles .markdown-body table as
-  //   display:block; width:max-content; max-width:100%; overflow:auto
-  // so a cell holding a full marketplace description blows the intrinsic width
-  // out, gets clamped to 100%, and the row clips its own text. Plain sections
-  // wrap the way prose is supposed to.
-  const cards = plugins.map((p) => {
-    const slug = repoSlug(p)
-    const title = slug ? `[${esc(p.displayName)}](https://github.com/${slug})` : esc(p.displayName)
-    const icon = p.icon?.url
-      ? `<picture>` +
-        `<source media="(prefers-color-scheme: dark)" srcset="icons/${p.id}-dark.svg">` +
-        `<img src="icons/${p.id}.svg" width="20" height="20" align="top" alt="">` +
-        `</picture> `
-      : ''
-    const tags = (p.tags ?? []).slice(0, 6).map(esc).join(' · ')
-    return `### ${icon}${title}\n\n${esc(p.description)}\n\n` +
-           '```sh\n' + `bb plugin install ${p.id}\n` + '```\n' +
-           (tags ? `\n<sub>${tags}</sub>\n` : '')
-  }).join('\n')
+/** Light icon with its dark twin, picked by GitHub's colour scheme. */
+function iconTag (p, size) {
+  if (!p.icon?.url) return ''
+  return `<picture><source media="(prefers-color-scheme: dark)" srcset="icons/${p.id}-dark.svg">` +
+         `<img src="icons/${p.id}.svg" width="${size}" height="${size}" align="top" alt=""></picture>`
+}
+
+/** The plugin's screenshot from its own repo, linked to it, light/dark when it has both. */
+function shotTag (p, s) {
+  const slug = repoSlug(p)
+  if (!s || !slug) return ''
+  const raw = (path) => `https://raw.githubusercontent.com/${slug}/HEAD/${path}`
+  const img = `<img src="${raw(s.shot)}" width="100%" alt="${esc(s.alt)}">`
+  const pic = s.dark
+    ? `<picture><source media="(prefers-color-scheme: dark)" srcset="${raw(s.dark)}">${img}</picture>`
+    : img
+  return `<a href="https://github.com/${slug}">${pic}</a>`
+}
+
+function card (p, s) {
+  const slug = repoSlug(p)
+  const name = esc(p.displayName)
+  const title = slug ? `[${escLink(p.displayName)}](https://github.com/${slug})` : name
+  const version = slug
+    ? ` <a href="https://github.com/${slug}/releases/latest"><img src="https://img.shields.io/github/v/release/${slug}?style=flat-square&label=&color=57606a" alt="Latest ${name} release" align="top"></a>`
+    : ''
+  const tags = (p.tags ?? []).slice(0, 6).map(esc).join(' · ')
+  return `<td width="50%" valign="top">
+
+${shotTag(p, s)}
+
+### ${iconTag(p, 20)} ${title}${version}
+
+${esc(p.tagline)}
+
+\`\`\`sh
+bb plugin install ${p.id}
+\`\`\`
+
+<details>
+<summary>More about ${name}</summary>
+
+${esc(p.description)}
+
+${tags ? `<sub>${tags}</sub>` : ''}
+</details>
+
+</td>`
+}
+
+function render (plugins, showcase) {
+  // Two cards per row. GitHub draws tables as display:block with a
+  // max-content width, so every cell is pinned to width="50%" and holds
+  // full-width images: that keeps long text wrapping inside its card
+  // instead of widening the table and clipping it.
+  const rows = []
+  for (let i = 0; i < plugins.length; i += 2) {
+    const pair = plugins.slice(i, i + 2).map((p) => card(p, showcase[p.id]))
+    if (pair.length === 1) pair.push('<td width="50%"></td>')
+    rows.push(`<tr>\n${pair.join('\n')}\n</tr>`)
+  }
 
   return `<!--
   GENERATED FILE — do not edit by hand.
@@ -192,39 +283,49 @@ function render (plugins) {
   page from https://getbb.app/marketplace/v1/marketplace.json
 -->
 
-<div align="center">
+<h1 align="center">bb plugins</h1>
 
-# bb plugins
+<p align="center"><b>${plugins.length} plugins for <a href="https://getbb.app">bb</a>, the agent IDE.</b><br>Each one is in the BB Community marketplace and installs with one command.</p>
 
-**${plugins.length} plugins for [bb](https://getbb.app), the agent IDE.**
-
+<p align="center">
 <img src="https://img.shields.io/badge/plugins-${plugins.length}-57606a?style=flat-square" alt="${plugins.length} plugins">
 <a href="https://github.com/get-bb/marketplace"><img src="https://img.shields.io/badge/BB%20Community-marketplace-57606a?style=flat-square" alt="Listed in the BB Community marketplace"></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-57606a?style=flat-square" alt="MIT license"></a>
+</p>
 
-</div>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
+  <img src="assets/hero-light.svg" width="100%" alt="A bb window with each plugin shown where it lives in bb">
+</picture>
 
-${cards}
 ## Install
 
-All of these are listed in the [BB Community marketplace](https://github.com/get-bb/marketplace), so BB installs them by name:
+All of these are listed in the [BB Community marketplace](https://github.com/get-bb/marketplace), so bb installs them by name:
 
 \`\`\`sh
 bb plugin install <name>
 \`\`\`
 
-Or browse them inside BB under **Settings → Plugins**.
+> [!TIP]
+> Or browse them inside bb under **Settings → Plugins**. Updates arrive the same way.
+
+## Plugins
+
+<table>
+${rows.join('\n')}
+</table>
 
 ## About this page
 
-Generated from the marketplace catalog BB itself reads, so the names, descriptions,
-tags and icons here are the same ones you see in the store.
+Generated from the marketplace catalog bb itself reads, so the names, descriptions,
+tags and icons here are the same ones you see in the store. Each one-liner is the
+plugin repo's GitHub description, and each screenshot comes from that repo.
 
 \`\`\`sh
 npm run build
 \`\`\`
 
-Plugins by [${AUTHOR}](https://github.com/${OWNER}) · MIT
+<p align="center"><sub>Plugins by <a href="https://github.com/${OWNER}">${AUTHOR}</a> · MIT</sub></p>
 `
 }
 
