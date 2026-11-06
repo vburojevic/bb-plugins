@@ -8,9 +8,9 @@
 
 # bb plugins
 
-**9 plugins for [bb](https://getbb.app), the agent IDE.**
+**10 plugins for [bb](https://getbb.app), the agent IDE.**
 
-<img src="https://img.shields.io/badge/plugins-9-57606a?style=flat-square" alt="9 plugins">
+<img src="https://img.shields.io/badge/plugins-10-57606a?style=flat-square" alt="10 plugins">
 <a href="https://github.com/get-bb/marketplace"><img src="https://img.shields.io/badge/BB%20Community-marketplace-57606a?style=flat-square" alt="Listed in the BB Community marketplace"></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-57606a?style=flat-square" alt="MIT license"></a>
 
@@ -75,6 +75,16 @@ bb plugin install prompt-enhancer
 ```
 
 <sub>composer · prompt · writing · interface · keyboard-shortcuts</sub>
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/iris-dark.svg"><img src="icons/iris.svg" width="20" height="20" align="top" alt=""></picture> [Iris](https://github.com/vburojevic/bb-plugin-iris)
+
+Turns agent replies into live cards you can use: charts, test runs, decisions, plans and small apps, drawn in your bb theme. Agents pick from 120 components on their own and check each card before you see it, so a status report arrives as metrics and progress, and proof of done as criteria with their evidence. Sliders and toggles recompute cards in place, buttons and pickers send your answer back to the agent, and live cards re-read files every 2 seconds while a job runs. Cards also read bb itself: the thread's context use, the threads it started, its pull request, commits and plan usage. Adds about 15k tokens of instructions to each top-level session, and maps and photos call OpenStreetMap, Photon and Wikimedia Commons unless you turn web lookups off.
+
+```sh
+bb plugin install iris
+```
+
+<sub>inline-ui · generative-ui · charts · interactive · components · test-reports</sub>
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/linear-dark.svg"><img src="icons/linear.svg" width="20" height="20" align="top" alt=""></picture> [Linear](https://github.com/vburojevic/bb-plugin-linear)
 

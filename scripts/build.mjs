@@ -72,14 +72,17 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 // straight into a README that is black-on-black in dark mode. Recolour them
 // into an explicit pair instead, and let <picture> choose.
 //
-// Only near-black and currentColor are rewritten; an icon carrying a real
-// brand colour (linear's #5E6AD2) is already legible on both canvases and is
-// left exactly as its author drew it.
+// Every paint is rewritten, brand colours included: BB shows these icons as
+// one-colour masks, so the index draws them the same way, as a monochrome set.
+// `none` and paint-server references (url(#…)) are left alone.
 const INK = { light: '#1f2430', dark: '#c9d1d9' }
 
 function theme (svg, colour) {
-  return svg.replace(/(stroke|fill)="(#000|#000000|black|currentColor)"/gi,
-                     (_, attr) => `${attr}="${colour}"`)
+  const painted = svg.replace(/\b(stroke|fill)="(?!none"|url\()[^"]+"/gi,
+                              (_, attr) => `${attr}="${colour}"`)
+  // A shape with no fill of its own paints black by default (iris draws its
+  // mark that way), so give the root a fill unless it already sets one.
+  return painted.replace(/<svg\b(?![^>]*\sfill=)/i, `<svg fill="${colour}"`)
 }
 
 // -------------------------------------------------------------------- main
