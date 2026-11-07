@@ -5,10 +5,12 @@
   },
   "handoff": {
     "shot": "assets/screenshots/handoff-panel.png",
+    "dark": "assets/screenshots/handoff-panel-dark.png",
     "alt": "The Hand off panel: pick a target agent, a machine, a model and a workspace mode"
   },
   "floating-terminal": {
-    "shot": "docs/media/hero.png",
+    "shot": "docs/media/light/hero.png",
+    "dark": "docs/media/dark/hero.png",
     "alt": "Three shells floating over a bb thread"
   },
   "floating-notes": {
@@ -23,6 +25,7 @@
   },
   "prompt-enhancer": {
     "shot": "assets/screenshots/hero.png",
+    "dark": "assets/screenshots/hero-dark.png",
     "alt": "A rough one-line draft rewritten into a brief with a Done when list"
   },
   "iris": {
@@ -32,14 +35,17 @@
   },
   "linear": {
     "shot": "assets/readme/panel.png",
+    "dark": "assets/readme/panel-dark.png",
     "alt": "The Linear panel in bb, listing issues"
   },
   "pets": {
-    "shot": "docs/media/tour.png",
-    "alt": "The pet introducing itself above the composer"
+    "shot": "docs/media/hero.gif",
+    "dark": "docs/media/hero-dark.gif",
+    "alt": "The pet walks along the top of the composer, hops down, crosses to the sidebar and calls out the thread that just failed"
   },
   "ayu": {
-    "shot": "assets/screenshots/hero.png",
+    "shot": "assets/screenshots/hero-light.png",
+    "dark": "assets/screenshots/hero-dark.png",
     "alt": "Ayu Light, Ayu Dark and Ayu Mirage side by side"
   }
 }

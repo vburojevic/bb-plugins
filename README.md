@@ -57,7 +57,7 @@ Tracks every Xcode build and test on the machine with no per-project configurati
 </td>
 <td width="50%" valign="top">
 
-<a href="https://github.com/vburojevic/bb-plugin-handoff"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-handoff/HEAD/assets/screenshots/handoff-panel.png" width="100%" alt="The Hand off panel: pick a target agent, a machine, a model and a workspace mode"></a>
+<a href="https://github.com/vburojevic/bb-plugin-handoff"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vburojevic/bb-plugin-handoff/HEAD/assets/screenshots/handoff-panel-dark.png"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-handoff/HEAD/assets/screenshots/handoff-panel.png" width="100%" alt="The Hand off panel: pick a target agent, a machine, a model and a workspace mode"></picture></a>
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/handoff-dark.svg"><img src="icons/handoff.svg" width="20" height="20" align="top" alt=""></picture> [Handoff](https://github.com/vburojevic/bb-plugin-handoff) <a href="https://github.com/vburojevic/bb-plugin-handoff/releases/latest"><img src="https://img.shields.io/github/v/release/vburojevic/bb-plugin-handoff?style=flat-square&label=&color=57606a" alt="Latest Handoff release" align="top"></a>
 
@@ -80,7 +80,7 @@ Moves a whole session between agents and machines in both directions: hands a bb
 <tr>
 <td width="50%" valign="top">
 
-<a href="https://github.com/vburojevic/bb-plugin-floating-terminal"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-floating-terminal/HEAD/docs/media/hero.png" width="100%" alt="Three shells floating over a bb thread"></a>
+<a href="https://github.com/vburojevic/bb-plugin-floating-terminal"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vburojevic/bb-plugin-floating-terminal/HEAD/docs/media/dark/hero.png"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-floating-terminal/HEAD/docs/media/light/hero.png" width="100%" alt="Three shells floating over a bb thread"></picture></a>
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/floating-terminal-dark.svg"><img src="icons/floating-terminal.svg" width="20" height="20" align="top" alt=""></picture> [Floating Terminal](https://github.com/vburojevic/bb-plugin-floating-terminal) <a href="https://github.com/vburojevic/bb-plugin-floating-terminal/releases/latest"><img src="https://img.shields.io/github/v/release/vburojevic/bb-plugin-floating-terminal?style=flat-square&label=&color=57606a" alt="Latest Floating Terminal release" align="top"></a>
 
@@ -145,7 +145,7 @@ Stashes prompts you write while an agent is busy and injects, schedules, or auto
 </td>
 <td width="50%" valign="top">
 
-<a href="https://github.com/vburojevic/bb-plugin-prompt-enhancer"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-prompt-enhancer/HEAD/assets/screenshots/hero.png" width="100%" alt="A rough one-line draft rewritten into a brief with a Done when list"></a>
+<a href="https://github.com/vburojevic/bb-plugin-prompt-enhancer"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vburojevic/bb-plugin-prompt-enhancer/HEAD/assets/screenshots/hero-dark.png"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-prompt-enhancer/HEAD/assets/screenshots/hero.png" width="100%" alt="A rough one-line draft rewritten into a brief with a Done when list"></picture></a>
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/prompt-enhancer-dark.svg"><img src="icons/prompt-enhancer.svg" width="20" height="20" align="top" alt=""></picture> [Prompt Enhancer](https://github.com/vburojevic/bb-plugin-prompt-enhancer) <a href="https://github.com/vburojevic/bb-plugin-prompt-enhancer/releases/latest"><img src="https://img.shields.io/github/v/release/vburojevic/bb-plugin-prompt-enhancer?style=flat-square&label=&color=57606a" alt="Latest Prompt Enhancer release" align="top"></a>
 
@@ -181,7 +181,7 @@ bb plugin install iris
 <details>
 <summary>More about Iris</summary>
 
-Turns agent replies into live cards you can use: charts, test runs, decisions, plans and small apps, drawn in your bb theme. Agents pick from 120 components on their own and check each card before you see it, so a status report arrives as metrics and progress, and proof of done as criteria with their evidence. Sliders and toggles recompute cards in place, buttons and pickers send your answer back to the agent, and live cards re-read files every 2 seconds while a job runs. Cards also read bb itself: the thread's context use, the threads it started, its pull request, commits and plan usage. Adds about 15k tokens of instructions to each top-level session, and maps and photos call OpenStreetMap, Photon and Wikimedia Commons unless you turn web lookups off.
+Turns agent replies into live cards you can use: charts, test runs, decisions, plans and small apps, drawn in your bb theme. Agents pick from 120 components on their own and check each card before you see it, so a status report arrives as metrics and progress, and proof of done as criteria with their evidence. Sliders and toggles recompute cards in place, buttons and pickers send your answer back to the agent, and live cards re-read files every 2 seconds while a job runs. Pin a card to keep it live beside the conversation, or open any card in the web playground. Cards also read bb itself: the thread's context use, the threads it started, its pull request, commits, terminals and plan usage. Adds about 3,500 tokens of instructions to each top-level session, and maps and photos call OpenStreetMap, Photon and Wikimedia Commons unless you turn web lookups off.
 
 <sub>inline-ui · generative-ui · charts · interactive · components · test-reports</sub>
 </details>
@@ -189,7 +189,7 @@ Turns agent replies into live cards you can use: charts, test runs, decisions, p
 </td>
 <td width="50%" valign="top">
 
-<a href="https://github.com/vburojevic/bb-plugin-linear"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-linear/HEAD/assets/readme/panel.png" width="100%" alt="The Linear panel in bb, listing issues"></a>
+<a href="https://github.com/vburojevic/bb-plugin-linear"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vburojevic/bb-plugin-linear/HEAD/assets/readme/panel-dark.png"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-linear/HEAD/assets/readme/panel.png" width="100%" alt="The Linear panel in bb, listing issues"></picture></a>
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/linear-dark.svg"><img src="icons/linear.svg" width="20" height="20" align="top" alt=""></picture> [Linear](https://github.com/vburojevic/bb-plugin-linear) <a href="https://github.com/vburojevic/bb-plugin-linear/releases/latest"><img src="https://img.shields.io/github/v/release/vburojevic/bb-plugin-linear?style=flat-square&label=&color=57606a" alt="Latest Linear release" align="top"></a>
 
@@ -212,7 +212,7 @@ Linear inside bb — a list-first issue browser, inbox, and create dialog served
 <tr>
 <td width="50%" valign="top">
 
-<a href="https://github.com/vburojevic/bb-plugin-pets"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-pets/HEAD/docs/media/tour.png" width="100%" alt="The pet introducing itself above the composer"></a>
+<a href="https://github.com/vburojevic/bb-plugin-pets"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vburojevic/bb-plugin-pets/HEAD/docs/media/hero-dark.gif"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-pets/HEAD/docs/media/hero.gif" width="100%" alt="The pet walks along the top of the composer, hops down, crosses to the sidebar and calls out the thread that just failed"></picture></a>
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/pets-dark.svg"><img src="icons/pets.svg" width="20" height="20" align="top" alt=""></picture> [Pets](https://github.com/vburojevic/bb-plugin-pets) <a href="https://github.com/vburojevic/bb-plugin-pets/releases/latest"><img src="https://img.shields.io/github/v/release/vburojevic/bb-plugin-pets?style=flat-square&label=&color=57606a" alt="Latest Pets release" align="top"></a>
 
@@ -233,7 +233,7 @@ Adds a pixel companion to the BB window that mirrors your fleet, walks to thread
 </td>
 <td width="50%" valign="top">
 
-<a href="https://github.com/vburojevic/bb-plugin-ayu"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-ayu/HEAD/assets/screenshots/hero.png" width="100%" alt="Ayu Light, Ayu Dark and Ayu Mirage side by side"></a>
+<a href="https://github.com/vburojevic/bb-plugin-ayu"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vburojevic/bb-plugin-ayu/HEAD/assets/screenshots/hero-dark.png"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-ayu/HEAD/assets/screenshots/hero-light.png" width="100%" alt="Ayu Light, Ayu Dark and Ayu Mirage side by side"></picture></a>
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/ayu-dark.svg"><img src="icons/ayu.svg" width="20" height="20" align="top" alt=""></picture> [Ayu](https://github.com/vburojevic/bb-plugin-ayu) <a href="https://github.com/vburojevic/bb-plugin-ayu/releases/latest"><img src="https://img.shields.io/github/v/release/vburojevic/bb-plugin-ayu?style=flat-square&label=&color=57606a" alt="Latest Ayu release" align="top"></a>
 
