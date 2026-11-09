@@ -47,5 +47,10 @@
     "shot": "assets/screenshots/hero-light.png",
     "dark": "assets/screenshots/hero-dark.png",
     "alt": "Ayu Light, Ayu Dark and Ayu Mirage side by side"
+  },
+  "cortado": {
+    "shot": "assets/full/thread-light.png",
+    "dark": "assets/full/thread-dark.png",
+    "alt": "One bb thread in Cortado. The chat shows a reply with a list, a table and a TypeScript block."
   }
 }

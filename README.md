@@ -6,10 +6,10 @@
 
 <h1 align="center">bb plugins</h1>
 
-<p align="center"><b>10 plugins for <a href="https://getbb.app">bb</a>, the agent IDE.</b><br>Each one is in the BB Community marketplace and installs with one command.</p>
+<p align="center"><b>11 plugins for <a href="https://getbb.app">bb</a>, the agent IDE.</b><br>Each one is in the BB Community marketplace and installs with one command.</p>
 
 <p align="center">
-<img src="https://img.shields.io/badge/plugins-10-57606a?style=flat-square" alt="10 plugins">
+<img src="https://img.shields.io/badge/plugins-11-57606a?style=flat-square" alt="11 plugins">
 <a href="https://github.com/get-bb/marketplace"><img src="https://img.shields.io/badge/BB%20Community-marketplace-57606a?style=flat-square" alt="Listed in the BB Community marketplace"></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-57606a?style=flat-square" alt="MIT license"></a>
 </p>
@@ -181,7 +181,7 @@ bb plugin install iris
 <details>
 <summary>More about Iris</summary>
 
-Turns agent replies into live cards you can use: charts, test runs, decisions, plans and small apps, drawn in your bb theme. Agents pick from 120 components on their own and check each card before you see it, so a status report arrives as metrics and progress, and proof of done as criteria with their evidence. Sliders and toggles recompute cards in place, buttons and pickers send your answer back to the agent, and live cards re-read files every 2 seconds while a job runs. Pin a card to keep it live beside the conversation, or open any card in the web playground. Cards also read bb itself: the thread's context use, the threads it started, its pull request, commits, terminals and plan usage. Adds about 3,500 tokens of instructions to each top-level session, and maps and photos call OpenStreetMap, Photon and Wikimedia Commons unless you turn web lookups off.
+Turns agent replies into live cards you can use: charts, test runs, decisions, plans, agent traces, eval reports and small apps, drawn in your bb theme. Agents pick from well over a hundred components on their own and check each card before you see it, so a status report arrives as metrics and progress, and proof of done as criteria with their evidence. Sliders and toggles recompute cards in place, buttons and pickers send your answer back to the agent (design variants, a theme preview, colors, marks on a screenshot, comments on a spec, a ranked list), and live cards re-read files while a job runs. Pin up to five live cards per thread, or let the agent pin a status card: a pinned chip above the composer opens them, bb's home page shows every thread's pins, and a pin can alert you when its condition turns true. Copy any card as an image, or open it in the web playground. Cards also read bb itself: the thread's context use, the threads it started, its pull request, commits, terminals and plan usage. Adds under 4,000 tokens of instructions to each top-level session, and maps and photos call OpenStreetMap, Photon and Wikimedia Commons unless you turn web lookups off.
 
 <sub>inline-ui · generative-ui · charts · interactive · components · test-reports</sub>
 </details>
@@ -252,6 +252,30 @@ Adds the three ayu themes (Light, Dark and Mirage) and a settings panel that swi
 </details>
 
 </td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+<a href="https://github.com/vburojevic/bb-plugin-cortado"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vburojevic/bb-plugin-cortado/HEAD/assets/full/thread-dark.png"><img src="https://raw.githubusercontent.com/vburojevic/bb-plugin-cortado/HEAD/assets/full/thread-light.png" width="100%" alt="One bb thread in Cortado. The chat shows a reply with a list, a table and a TypeScript block."></picture></a>
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="icons/cortado-dark.svg"><img src="icons/cortado.svg" width="20" height="20" align="top" alt=""></picture> [Cortado](https://github.com/vburojevic/bb-plugin-cortado) <a href="https://github.com/vburojevic/bb-plugin-cortado/releases/latest"><img src="https://img.shields.io/github/v/release/vburojevic/bb-plugin-cortado?style=flat-square&label=&color=57606a" alt="Latest Cortado release" align="top"></a>
+
+A bb theme in neutral graphite with warm orange and amber, in light and dark.
+
+```sh
+bb plugin install cortado
+```
+
+<details>
+<summary>More about Cortado</summary>
+
+Neutral graphite with warm orange and amber, in light and dark. Three palettes: one that follows bb's light or dark mode, and fixed dark and light versions. Recolors the app, the syntax colors in chat, diffs and file previews, and the terminal.
+
+<sub>themes · appearance · colors · dark-theme · light-theme · graphite</sub>
+</details>
+
+</td>
+<td width="50%"></td>
 </tr>
 </table>
 

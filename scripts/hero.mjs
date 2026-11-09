@@ -13,6 +13,7 @@ export const SPOTS = {
   'linear':            { x: 520, y: 112, label: 'Linear', anchor: 'start', dx: 30, dy: 5 },
   'xcode':             { x: 92,  y: 394, label: 'Xcode', anchor: 'start', dx: 30, dy: 5 },
   'ayu':               { x: 92,  y: 448, label: 'Ayu', anchor: 'start', dx: 30, dy: 5 },
+  'cortado':           { x: 92,  y: 502, label: 'Cortado', anchor: 'start', dx: 30, dy: 5 },
   'iris':              { x: 388, y: 262, label: 'Iris', anchor: 'start', dx: 30, dy: 5 },
   'prompts':           { x: 352, y: 418, label: 'Prompts', anchor: 'start', dx: 30, dy: 5 },
   'prompt-enhancer':   { x: 770, y: 488, label: 'Prompt Enhancer', anchor: 'end', dx: -30, dy: 5 },

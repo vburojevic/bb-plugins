@@ -145,4 +145,14 @@
 </svg>
       <text x="122" y="453" text-anchor="start" font-size="15" font-weight="600" fill="#c9d1d9">Ayu</text>
     </g>
+    <g class="m" style="animation-delay:1.55s">
+      <circle cx="92" cy="502" r="21" fill="#0d1117" stroke="#c9d1d9" stroke-width="1.5"/>
+      <svg x="81" y="491" width="22" height="22" viewBox="0 0 24 24" fill="#c9d1d9">
+  
+  <circle cx="10.5" cy="12" r="8.1" fill="none" stroke="#c9d1d9" stroke-width="1.8"/>
+  <rect x="18.4" y="10.5" width="4.4" height="3" rx="1.5"/>
+  <path transform="translate(10.5 12) rotate(-35)" d="M -5 0 A 2.5 2.5 0 0 1 0 0 A 2.5 2.5 0 0 0 5 0 A 5 5 0 0 0 -5 0 Z"/>
+</svg>
+      <text x="122" y="507" text-anchor="start" font-size="15" font-weight="600" fill="#c9d1d9">Cortado</text>
+    </g>
 </svg>

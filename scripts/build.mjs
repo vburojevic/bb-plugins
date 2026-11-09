@@ -149,11 +149,16 @@ async function main () {
         p.tagline = /^[^.]*\./.exec(p.description)?.[0] ?? p.description
       }
 
-      const src = p.icon?.url
-      if (!src) { console.warn(`!  ${p.id} has no icon`); continue }
-      const res = await fetch(new URL(src, MARKETPLACE))
-      if (!res.ok) throw new Error(`icon for ${p.id} -> HTTP ${res.status}`)
-      const svg = await res.text()
+      // A full-color marketplace icon (a gradient app tile) recolors to a
+      // solid square, so icon-overrides/<id>.svg can supply a monochrome mark.
+      let svg = await readFile(join(ROOT, 'icon-overrides', `${p.id}.svg`), 'utf8').catch(() => null)
+      if (!svg) {
+        const src = p.icon?.url
+        if (!src) { console.warn(`!  ${p.id} has no icon`); continue }
+        const res = await fetch(new URL(src, MARKETPLACE))
+        if (!res.ok) throw new Error(`icon for ${p.id} -> HTTP ${res.status}`)
+        svg = await res.text()
+      }
       // The hero inlines every icon into one SVG, where ids would collide.
       if (/\sid="/.test(svg)) throw new Error(`icon for ${p.id} uses id="…"; the hero can't inline it safely`)
       icons.set(p.id, svg)
